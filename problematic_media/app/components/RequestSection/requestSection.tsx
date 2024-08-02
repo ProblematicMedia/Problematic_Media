@@ -25,8 +25,10 @@ const RequestSection = () => {
             <div className={styles.subtitle}>
                 CONNECT FOR EXCELLENCE:
                 <br />
-                YOUR GATEWAY TO EXCEPTIONAL SOLUTIONS.</div>
-            <form className={styles.form}>
+                YOUR GATEWAY TO EXCEPTIONAL SOLUTIONS.
+            </div>
+            <div className={styles.content}>
+               <form className={styles.form}>
         <div className={styles.formInput}>
           <label htmlFor="name">Name:</label>
           <input
@@ -71,7 +73,16 @@ const RequestSection = () => {
           />
         </div>
         <button type="submit">Submit</button>
-      </form>
+            </form>
+            <div>
+                <div>
+                Unit 2/36 Finance Pl, Malaga WA 6090
+                </div>
+                <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3388.891327152225!2d115.8942837764799!3d-31.855172317601905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32b1a9a8daaaab%3A0xb566e7abaf29b3a9!2sUnit%202%2F36%20Finance%20Pl%2C%20Malaga%20WA%206090!5e0!3m2!1sen!2sau!4v1722560726817!5m2!1sen!2sau" width="400" height="300" styles="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+            </div>
+        </div>
+           
         </div>
     </div>
   );

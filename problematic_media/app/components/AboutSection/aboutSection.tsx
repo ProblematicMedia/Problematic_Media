@@ -7,20 +7,37 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
-import about from "../../../public/images/about.png"
+import aboutImg from "../../../public/images/about.png"
 import styles from "./aboutSection.module.css";
 
-
-
-
 export default function AboutSection() {
+  // let about = useRef(null);
+
+  // gsap.registerPlugin(ScrollTrigger);
+
+  // useGSAP(() => {
+  //     gsap.to(about.current, {
+  //     yPercent: -100,
+  //      ease : 'none',
+  //     // background: "green",
+  //     scrollTrigger: {
+  //       trigger: about.current,
+  //       start: "top top",
+  //       // end : '+=' + about.current.offsetHeight,
+  //       scrub: 1,
+  //       markers: true,
+  //       pin: true,
+  //     }
+  //   })
+  // })
+
   return (
     <section className={styles.about}>
         <div className={styles.container} id="about">
             <div className={styles.title}>Who We Are</div>
             <div className={styles.aboutIntro}>
             <Image
-                src={about}
+                src={aboutImg}
                 alt="About Problematic Media"
                 />
             <p>

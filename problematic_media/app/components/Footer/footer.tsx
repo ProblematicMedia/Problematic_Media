@@ -7,13 +7,10 @@ const Footer = () => {
     return (
         <div className={styles.footer}>
         <Image
-      src={logo}
-      alt="Logo"
-      width={200}
-    />
-
-
-     
+            src={logo}
+            alt="Logo"
+            width={200}
+        />
     </div>
     )
 }

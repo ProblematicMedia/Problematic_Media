@@ -21,9 +21,14 @@
     font-weight: bold;
 }
 
-.form {
-    transform: translate(25%, 10px);
+.content {
+    display: flex;
+    justify-content: space-between;
 }
+
+/* .form {
+    transform: translate(25%, 10px);
+} */
 
 .formInput {
     display: flex;
