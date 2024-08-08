@@ -7,17 +7,38 @@ import title from "../../../public/images/title.png"
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import TextPlugin from 'gsap/TextPlugin';
 
 import styles from "./mainSection.module.css";
+import Header from '../Header/header';
 
-const MainSection: React.FC = () => {
+
+interface MainSectionPropsType {
+  aboutRef: React.RefObject<HTMLDivElement>;
+  servicesRef: React.RefObject<HTMLDivElement>;
+  strongPointsRef: React.RefObject<HTMLDivElement>;
+  contactUsRef: React.RefObject<HTMLDivElement>;
+  section: React.RefObject<HTMLDivElement>;
+}
+
+gsap.registerPlugin(TextPlugin);
+
+const MainSection = ({aboutRef,
+  servicesRef,
+  strongPointsRef,
+  contactUsRef,
+  section
+} : MainSectionPropsType) => {
     const [binaryArray, setBinaryArray] = useState<string[][]>([]);
     const binaryRefs = useRef<Array<HTMLSpanElement | null>>([]);
+    const textRef = useRef(null);
+    const solutionRef = useRef(null);
 
     useEffect(() => {
         const generateBinaryArray = () => {
             const containerHeight = window.innerHeight;
-            const numberOfRows = Math.floor((containerHeight - 159) / 20);
+            // const numberOfRows = Math.floor((containerHeight - 159) / 20);
+            const numberOfRows = Math.floor(containerHeight / 20);
             const numberOfColumns = Math.floor(window.innerWidth / 20);
             const binaryArray = [];
 
@@ -36,8 +57,7 @@ const MainSection: React.FC = () => {
         window.addEventListener('resize', generateBinaryArray);
 
         return () => window.removeEventListener('resize', generateBinaryArray);
-    }, [])
-
+    }, []);
 
     useEffect(() => {
         const totalNumbers = binaryArray.length * (binaryArray[0]?.length || 0);
@@ -71,10 +91,38 @@ const MainSection: React.FC = () => {
         return () => clearInterval(intervalId);
       }, [binaryArray]);
 
+
+      // useGSAP(() => {
+      //   const tlText = gsap.timeline();
+      //   tlText
+      //     .to(textRef.current, {
+      //       duration: 3,
+      //       text:"Where Problems Find ", 
+      //       ease :  'power1.in'
+      //     })
+      //     .to(solutionRef.current, {
+      //       duration: 3,
+      //       text:"Solutions", 
+      //       ease :  'power1.in'
+      //     }, "+=1")
+
+
+      // }, [])
+
+      useGSAP(() => {
+        gsap.fromTo(textRef.current, 
+          {fontSize: 0},
+          {fontSize: 72, delay: 1, duration: 2, ease: "power1.out" }
+      )}, [])
+
+    
   return (
   <div className={styles.main}>
+    <div className={styles.layer}>
+
+    </div>
         <div className={styles.binaryBackground}>
-{binaryArray && binaryArray.map((row, rowIndex) => {
+        {binaryArray && binaryArray.map((row, rowIndex) => {
             return <div className={styles.binaryRow} key={rowIndex}>
                 {row.map((num, colIndex) => {
                     return <span className={`${styles.binaryNum}`} key={colIndex} 
@@ -91,14 +139,22 @@ const MainSection: React.FC = () => {
             </div>
         })}
         </div>
-        
-        <div className={styles.title}>
-        <Image
-            src={title}
-            alt="Title"
-            width={1000}
-            
-        />
+        <div className={styles.header}>
+          <Header 
+            aboutRef={aboutRef}
+            servicesRef={servicesRef}
+            strongPointsRef={strongPointsRef}
+            contactUsRef={contactUsRef} 
+            section={section}
+          />
+        </div>
+
+        <div className={styles.content}>
+          {/*KEYBOARD ANIMATION */}
+            {/* <span className={`${styles.title}`} ref={textRef}></span>
+            <span className={`${styles.title}`} ref={solutionRef}>   </span>
+            <span className={styles.cursor}>  {" "}</span> */}
+            <div className={`${styles.title}`} ref={textRef}>Where Problems Find Solutions</div>
         </div>
     </div>
   );

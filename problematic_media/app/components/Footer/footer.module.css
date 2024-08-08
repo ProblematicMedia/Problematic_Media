@@ -1,4 +1,29 @@
 .footer {
-    padding: 20px 50px;
+    padding: 20px 100px;
     border-top: 1px solid black;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email {
+    padding-bottom: 15px;
+}
+
+.media {
+    display: flex;
+    justify-content: flex-end;
+   gap: 10px;
+}
+
+.media a {
+    cursor: pointer;
+}
+
+.copyright {
+    text-align: center;
+    font-family: var(--font-allerta);
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Header from "./components/Header/header";
@@ -21,57 +21,79 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [tl, setTl] = useState<GSAPTimeline>();
+  const [tlStrongPoints, setTlStrongPoints] = useState<GSAPTimeline>()
   const home = useRef(null);
   const about = useRef(null);
   const services = useRef(null);
-  const container = useRef(null)
+  const container = useRef(null);
+  const section = useRef(null);
+  const sectionTwo = useRef(null);
+  const points = useRef(null);
+  const request = useRef(null);
 
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-      gsap.to(about.current, {
-      yPercent: -100,
+    const tl = gsap.timeline({});
 
-      // background: "green",
+    setTl(tl);
+
+    tl.to(about.current, { xPercent: -100, delay: 0.1})
+
+    ScrollTrigger.create({
+      animation: tl,
+      trigger: section.current,
+      pin: true,
+      // pinType: "fixed",
+      // anticipatePin: 1,
+      scrub: 1,
+      start: "top top",
+      end: `bottom+=${tl.duration() * 3000} bottom`
+    })
+
+    const tlStrongPoints: GSAPTimeline = gsap.timeline({});
+    setTlStrongPoints(tlStrongPoints);
+
+    tlStrongPoints.to(points.current, {
+      yPercent: -110,
+      delay: 2,
       scrollTrigger: {
-        trigger: home.current,
+        trigger: sectionTwo.current,
         start: "top top",
-        end : "bottom+=80%",
-        scrub: 1,
-        markers: true,
-        pin: true,
+        end: "bottom 70%",
+        // pin: true,
+        scrub: 1
       }
-    })
-
-    const tlTraining = gsap.timeline({ paused: true });
-
-      gsap.to(services.current, {
-        xPercent: -100,
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          scrub: 1,
-          markers: true,
-          pin: true,
-        }
-    })
-  })
+    }, "+=10")
+  });
 
   return (
     <main  className={styles.main}>
-      <div ref={home}>
-        <Header />
-        <MainSection />
+      <div  ref={home}>
+        {/* <Header /> */}
+        <MainSection 
+        
+        aboutRef={about}
+        servicesRef={services}
+        strongPointsRef={points}
+        contactUsRef={request}
+        section={section}
+      />
      </div>
-    
-      <div  ref={about}><AboutSection /></div>
-      <div ref={container}>
-        <div  ref={services}><ServicesSection /></div>
-     </div>
-      
-      <StrongPointsSection />
-      <RequestSection />
-      <Footer />
+    <div ref={section} className={styles.section}>
+      <section ref={about} className={styles.about}>
+        <AboutSection />
+      </section>
+      <section ref={services} className={styles.services}>
+        <ServicesSection timeline={tl}  />
+      </section>
+    </div>
+    <div ref={sectionTwo} className={styles.sectionTwo}>
+      <div ref={points} className={styles.points}><StrongPointsSection timeline={tlStrongPoints} /></div>
+      <div className={styles.request}><RequestSection /></div>
+    </div>
+      <div ref={request}><Footer  /></div>
     </main>
   );
 }

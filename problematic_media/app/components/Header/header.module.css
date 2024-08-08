@@ -1,15 +1,37 @@
 .header {
-    /* width: 100%;
-    height: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    z-index: 10;
-    top: 0;
+    padding: 10px 50px;
+}
+
+.menu {
+    font-family: var(--font-allerta);
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    justify-content: space-around;
+}
+
+.menu span {
+    cursor: pointer;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.menu span::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(360deg, #000 3%, rgba(0, 0, 0, 0.12) 100%); 
+    bottom: -10px;
     left: 0;
-    right: 0;
-    border-radius: 0;
-    padding: 0.5rem 1rem;
-    mix-blend-mode: difference; */
+    transform: scale(0);
+    transition: .2s all ease-out;
+
+}
+
+.menu span:hover::after {
+    transform: scale(1);
 }
